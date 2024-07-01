@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+    <link rel="stylesheet" href="{% static 'css/lobby.css' %}">
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'logout' %}">Logout</a><br><br>
+        <h1>Hello, {{ user.username }}</h1>
+        <p>What chat room would you like to enter?</p>
+        
+        <form id="room-selection-form">
+            <!-- Example chat rooms, replace with your dynamic chat rooms -->
+            <input type="radio" id="room1" name="room" value="room1">
+            <label for="room1">Sport Chat Room</label><br>
+            <input type="radio" id="room2" name="room" value="room2">
+            <label for="room2">Guitar Community Chat Room</label><br>
+            <input type="radio" id="room3" name="room" value="room3">
+            <label for="room3">Tec Chat Room</label><br>
+        </form>
+        
+        <input id="room-name-submit" type="button" value="Enter">
+
+        <script>
+            document.querySelector('#room-name-submit').onclick = function(e) {
+                var selectedRoom = document.querySelector('input[name="room"]:checked');
+                if (selectedRoom) {
+                    var roomName = selectedRoom.value;
+                    window.location.pathname = '/chat/' + roomName + '/';
+                } else {
+                    alert('Please select a chat room.');
+                }
+            };
+        </script>
+    </div>
+</body>
+</html>
